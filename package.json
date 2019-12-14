@@ -1,0 +1,61 @@
+{
+  "name": "open-admin",
+  "version": "2.1.0",
+  "author": "Liuyadu<515608851@qq.com>",
+  "private": false,
+  "scripts": {
+    "dev": "vue-cli-service serve --open",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test:unit": "vue-cli-service test:unit",
+    "test:e2e": "vue-cli-service test:e2e"
+  },
+  "dependencies": {
+    "@riophae/vue-treeselect": "0.0.38",
+    "axios": "^0.19.0",
+    "clipboard": "^2.0.0",
+    "codemirror": "^5.49.2",
+    "countup": "^1.8.2",
+    "cropperjs": "^1.5.6",
+    "crypto-js": "^3.1.9-1",
+    "dayjs": "^1.8.17",
+    "echarts": "^4.4.0",
+    "highlight.js": "^9.16.2",
+    "html2canvas": "^1.0.0-rc.5",
+    "iview": "^3.5.3",
+    "iview-area": "^1.5.17",
+    "js-cookie": "^2.2.1",
+    "jshint": "^2.10.3",
+    "moment": "^2.24.0",
+    "simplemde": "^1.11.2",
+    "sortablejs": "^1.10.1",
+    "tree-table-vue": "^1.1.0",
+    "vue": "^2.6.9",
+    "vue-i18n": "^8.15.0",
+    "vue-neditor-wrap": "^1.0.4",
+    "vue-router": "^3.1.3",
+    "vuedraggable": "^2.23.2",
+    "vuex": "^3.1.0",
+    "wangeditor": "^3.1.1",
+    "xlsx": "^0.14.5"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.12.1",
+    "@vue/cli-plugin-eslint": "^3.12.1",
+    "@vue/cli-plugin-unit-mocha": "^3.12.1",
+    "@vue/cli-service": "^3.12.1",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "chai": "^4.1.2",
+    "eslint-plugin-cypress": "^2.7.0",
+    "less": "^3.10.3",
+    "less-loader": "^4.0.5",
+    "lint-staged": "^8.2.1",
+    "vue-template-compiler": "^2.6.9"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
