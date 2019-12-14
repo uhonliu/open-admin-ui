@@ -105,6 +105,8 @@ export default {
       }
     },
     changeStaffList (val) {
+      this.staffInfo.name = ''
+      this.staffInfo.mobile = ''
       if (val.companyId) {
         this.staffInfo.companyId = val.companyId
         this.staffInfo.departmentId = ''

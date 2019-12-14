@@ -2,6 +2,18 @@
   <div>
     <leftTree menuType="staff" @changeData="changeData" @searchStaff="changeStaffInfo"></leftTree>
     <div>
+      <Form :label-width="0" inline :model="staffInfo">
+        <FormItem prop="name">
+          <Input v-model="staffInfo.name" placeholder="输入员工姓名" style="width:150px;"></Input>
+        </FormItem>
+        <FormItem prop="mobile">
+          <Input v-model="staffInfo.mobile" placeholder="输入手机号码"  style="width:150px;"></Input>
+        </FormItem>
+        <FormItem>
+          <Button type="primary" @click="searchStaff()">查询</Button>
+          <Button @click="resetForm()">重置</Button>
+        </FormItem>
+      </Form>
       <Table
         stripe
         border
@@ -250,6 +262,11 @@ export default {
           key: 'name'
         },
         {
+          title: '所属公司',
+          align: 'center',
+          key: 'companyName'
+        },
+        {
           title: '所属部门',
           align: 'center',
           key: 'departmentName'
@@ -397,25 +414,6 @@ export default {
     }
   },
   methods: {
-    // remoteMethod1(query) {
-    //   if (query !== "") {
-    //     this.loading1 = true;
-    //     setTimeout(() => {
-    //       this.loading1 = false;
-    //       const list = this.optionList.map(item => {
-    //         return {
-    //           userId: item.userId,
-    //           name: item.name
-    //         };
-    //       });
-    //       this.higherList = list.filter(
-    //         item => item.name.toLowerCase().indexOf(query.toLowerCase()) > -1
-    //       );
-    //     }, 200);
-    //   } else {
-    //     this.higherList = this.optionList;
-    //   }
-    // },
     getcompanyInfo () {
       companyInfo().then(res => {
         if (res.code === 0) {
@@ -440,6 +438,7 @@ export default {
       })
     },
     searchStaff (pageIndex) {
+      this.tableLoading = true
       if (pageIndex) {
         this.staffInfo.pageIndex = pageIndex
       }
@@ -447,6 +446,7 @@ export default {
         if (res.code === 0) {
           this.data = res.data.records
           this.staffInfo.total = Number(res.data.total)
+          this.tableLoading = false
         }
       })
     },
@@ -546,6 +546,7 @@ export default {
     changeData (val) {
       this.data = val.records
       this.staffInfo.total = Number(val.total)
+      this.tableLoading = false
     },
     handlePage (val) {
       this.searchStaff(val)
@@ -555,15 +556,9 @@ export default {
       this.searchStaff(1)
     },
     changeStaffInfo (val) {
-      if (val.companyId) {
-        this.staffInfo.companyId = val.companyId
-        this.staffInfo.departmentId = ''
-        this.searchStaff()
-      } else if (val.departmentId) {
-        this.staffInfo.companyId = ''
-        this.staffInfo.departmentId = val.departmentId
-        this.searchStaff()
-      }
+      this.tableLoading = true
+      this.staffInfo.name = ''
+      this.staffInfo.mobile = ''
     },
     getStaffList () {
       getAllStaff().then(res => {
@@ -582,6 +577,11 @@ export default {
       })
       this.higherList = list.filter(item => item.userId !== '0')
       // this.optionList = this.higherList;
+    },
+    resetForm () {
+      this.staffInfo.name = ''
+      this.staffInfo.mobile = ''
+      this.searchStaff(1)
     }
   },
   created () {

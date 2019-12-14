@@ -77,6 +77,17 @@ export const addCompany = ({ address, areaId, companyName, companyNameEn, contac
 /**
  * 获取所有部门信息
  */
+export const topDepartmentList = (params) => {
+  return request({
+    url: '/org/department/departments',
+    params,
+    method: 'get'
+  })
+}
+
+/**
+ * 获取所有部门信息
+ */
 export const departmentList = (params) => {
   return request({
     url: '/org/department/list',
@@ -179,7 +190,7 @@ export const searchDepartment = (params) => {
 export const getSubdepartment = ({ departmentId }) => {
   const params = { departmentId: departmentId }
   return request({
-    url: '/org/department/childrens',
+    url: '/org/department/children',
     params,
     method: 'get'
   })
