@@ -91,7 +91,6 @@
             <i-switch
               v-model="addAllFrom.state"
               :value="addAllFrom.state"
-              @on-change="isHomeShowSwitch(addAllFrom)"
               size="large"
             >
               <span slot="open">启用</span>
@@ -243,9 +242,6 @@ export default {
     }
   },
   methods: {
-    isHomeShowSwitch (isShow) {
-      let objswitch = isShow
-    },
     // 获取所有渠道
     getAllPayType () {
       getAllpayWay()
@@ -290,10 +286,6 @@ export default {
           err => {}
         )
         .finally(() => {})
-    },
-    isHomeShowSwitch (isShow) {
-      let objswitch = isShow
-      // console.log(objswitch);
     },
     ok (all) {
       let self = this

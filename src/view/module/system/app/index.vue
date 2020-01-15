@@ -148,6 +148,28 @@
               <FormItem label="描述">
                 <Input v-model="formItem.appDesc" type="textarea" placeholder="请输入内容"></Input>
               </FormItem>
+              <FormItem label="是否验签">
+                <RadioGroup v-model="formItem.isSign" type="button">
+                  <Radio label="0">否</Radio>
+                  <Radio label="1">是</Radio>
+                </RadioGroup>
+              </FormItem>
+              <FormItem label="是否加密">
+                <RadioGroup v-model="formItem.isEncrypt" type="button">
+                  <Radio label="0">否</Radio>
+                  <Radio label="1">是</Radio>
+                </RadioGroup>
+              </FormItem>
+              <FormItem label="加密类型" prop="encryptType">
+                <Select v-model="formItem.encryptType" @on-change="handleOnEncryptTypeChange">
+                  <Option value="RSA">RSA</Option>
+                  <Option value="AES">AES</Option>
+                  <Option value="DES">DES</Option>
+                </Select>
+              </FormItem>
+              <FormItem v-if="formItem.encryptType === 'RSA'" prop="publicKey" label="RSA公钥">
+                <Input v-model="formItem.publicKey" type="textarea" placeholder="请输入RSA公钥"></Input>
+              </FormItem>
             </Form>
           </TabPane>
           <TabPane :disabled="!formItem.appId" label="开发信息" name="form2">
@@ -348,6 +370,10 @@ export default {
         website: '',
         appDesc: '',
         status: 1,
+        isSign: '',
+        isEncrypt: '',
+        encryptType: '',
+        publicKey: '',
         redirectUrls: '',
         developerId: '',
         scopes: ['userProfile'],
@@ -459,6 +485,8 @@ export default {
         this.handleLoadAppGranted(this.formItem.appId)
       }
       this.formItem.status = this.formItem.status + ''
+      this.formItem.isSign = this.formItem.isSign + ''
+      this.formItem.isEncrypt = this.formItem.isEncrypt + ''
     },
     handleResetForm (form) {
       this.$refs[form].resetFields()
@@ -478,6 +506,10 @@ export default {
         website: '',
         appDesc: '',
         status: 1,
+        isSign: '',
+        isEncrypt: '',
+        encryptType: '',
+        publicKey: '',
         redirectUrls: '',
         developerId: '',
         scopes: ['userProfile'],
@@ -499,6 +531,17 @@ export default {
       this.modalVisible = false
     },
     handleSubmit () {
+      if (this.formItem.isEncrypt === 1 || this.formItem.isEncrypt === '1') {
+        this.formItemRules.encryptType = { required: true, message: '请选择加密类型', trigger: 'blur' }
+        if (this.formItem.encryptType === 'RSA') {
+          this.formItemRules.publicKey = { required: true, message: 'RSA公钥不能为空', trigger: 'blur' }
+        } else {
+          this.formItemRules.publicKey = { required: false, message: 'RSA公钥不能为空', trigger: 'blur' }
+        }
+      } else {
+        this.formItemRules.encryptType = { required: false, message: '请选择加密类型', trigger: 'blur' }
+        this.formItemRules.publicKey = { required: false, message: 'RSA公钥不能为空', trigger: 'blur' }
+      }
       if (this.current === this.forms[0]) {
         this.$refs[this.current].validate((valid) => {
           if (valid) {
@@ -633,6 +676,11 @@ export default {
         if (!this.formItem.appOs) {
           this.formItem.appOs = 'ios'
         }
+      }
+    },
+    handleOnEncryptTypeChange (data) {
+      if (data !== 'RSA' || !this.formItem.publicKey) {
+        this.formItem.publicKey = ''
       }
     },
     handleOnSelectUser (data) {

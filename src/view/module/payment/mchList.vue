@@ -8,7 +8,7 @@
         <FormItem label="商户类型：" prop="type">
           <Select style="width:200px;" clearable v-model="searchForm.type" placeholder="全部订单">
             <Option
-              v-for="(item,index) in allocationType"
+              v-for="item in allocationType"
               :value="item.key"
               :key="item.key"
             >{{item.name}}</Option>

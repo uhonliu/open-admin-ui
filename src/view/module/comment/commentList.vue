@@ -108,7 +108,6 @@ export default {
       isBatch: false,
       replyContent: '',
       isReply: false,
-      loading: true,
       isAdopt: false,
       isShield: false,
       deleteArray: [], // 批量删除  存id的数组

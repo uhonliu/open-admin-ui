@@ -27,9 +27,13 @@ export const getApps = ({ page, limit, appId, appName, appNameEn }) => {
  * @param appDesc
  * @param status
  * @param website
- * @param userId
+ * @param developerId
+ * @param isSign
+ * @param isEncrypt
+ * @param encryptType
+ * @param publicKey
  */
-export const addApp = ({ appName, appNameEn, appType, appIcon, appOs, appDesc, status, website, developerId }) => {
+export const addApp = ({ appName, appNameEn, appType, appIcon, appOs, appDesc, status, website, developerId, isSign, isEncrypt, encryptType, publicKey }) => {
   const data = {
     appName: appName,
     appNameEn: appNameEn,
@@ -39,7 +43,11 @@ export const addApp = ({ appName, appNameEn, appType, appIcon, appOs, appDesc, s
     appDesc: appDesc,
     status: status,
     website: website,
-    developerId: developerId
+    developerId: developerId,
+    isSign: isSign,
+    isEncrypt: isEncrypt,
+    encryptType: encryptType,
+    publicKey: publicKey
   }
   return request({
     url: 'base/app/add',
@@ -59,9 +67,13 @@ export const addApp = ({ appName, appNameEn, appType, appIcon, appOs, appDesc, s
  * @param appDesc
  * @param status
  * @param website
- * @param userId
+ * @param developerId
+ * @param isSign
+ * @param isEncrypt
+ * @param encryptType
+ * @param publicKey
  */
-export const updateApp = ({ appId, appName, appNameEn, appType, appIcon, appOs, appDesc, status, website, developerId }) => {
+export const updateApp = ({ appId, appName, appNameEn, appType, appIcon, appOs, appDesc, status, website, developerId, isSign, isEncrypt, encryptType, publicKey }) => {
   const data = {
     appId: appId,
     appName: appName,
@@ -72,7 +84,11 @@ export const updateApp = ({ appId, appName, appNameEn, appType, appIcon, appOs, 
     appDesc: appDesc,
     status: status,
     website: website,
-    developerId: developerId
+    developerId: developerId,
+    isSign: isSign,
+    isEncrypt: isEncrypt,
+    encryptType: encryptType,
+    publicKey: publicKey
   }
   return request({
     url: 'base/app/update',
